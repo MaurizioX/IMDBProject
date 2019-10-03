@@ -1,19 +1,19 @@
-package mzx.imdbproject.data.model
+package mzx.imdbproject.domain.entity
 
-interface MovieCollectionData {
-    val dates: DatesData
+interface MovieCollectionEntity {
+    val dates: DatesEntity
     val page: Int
-    val results: List<MovieData>
+    val results: List<MovieEntity>
     val totalPages: Int
     val totalResults: Int
 }
 
-interface DatesData {
+interface DatesEntity {
     val maximum: String
     val minimum: String
 }
 
-interface MovieData {
+interface MovieEntity {
     val adult: Boolean
     val backdropPath: String
     val genreIds: List<Int>

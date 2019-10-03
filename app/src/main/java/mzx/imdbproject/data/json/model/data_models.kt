@@ -1,9 +1,9 @@
 package mzx.imdbproject.data.json.model
 
 import com.fasterxml.jackson.annotation.JsonProperty
-import mzx.imdbproject.data.model.Dates
-import mzx.imdbproject.data.model.Movie
-import mzx.imdbproject.data.model.MovieCollection
+import mzx.imdbproject.data.model.DatesData
+import mzx.imdbproject.data.model.MovieData
+import mzx.imdbproject.data.model.MovieCollectionData
 
 data class MovieCollectionJson(
     override val dates: DatesJson,
@@ -13,12 +13,12 @@ data class MovieCollectionJson(
     override val totalPages: Int,
     @JsonProperty("total_results")
     override val totalResults: Int
-) : MovieCollection
+) : MovieCollectionData
 
 data class DatesJson(
     override val maximum: String,
     override val minimum: String
-) : Dates
+) : DatesData
 
 data class MovieJson(
     override val adult: Boolean,
@@ -43,4 +43,4 @@ data class MovieJson(
     override val voteAverage: Double,
     @JsonProperty("vote_count")
     override val voteCount: Int
-) : Movie
+) : MovieData
