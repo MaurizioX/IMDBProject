@@ -22,6 +22,6 @@ class MainActivityTest {
 
     @Test
     fun checkActivityDataLoading() {
-        Thread.sleep(5000)
+        Thread.sleep(15000)
     }
 }

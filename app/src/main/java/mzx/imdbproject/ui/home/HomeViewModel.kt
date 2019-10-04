@@ -14,11 +14,11 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(private val getMoviesUseCase: GetMoviesUseCase) :
     ViewModel() {
 
-    private val movieList = MutableLiveData<List<MovieUi>>().apply {
+    private val _movieList = MutableLiveData<List<MovieUi>>().apply {
         getMoviesUseCase.execute(MovieCollectionDisposableObserver(this))
 
     }
-    val text: LiveData<List<MovieUi>> = movieList
+    val movieList: LiveData<List<MovieUi>> = _movieList
 
     class MovieCollectionDisposableObserver(private val movieUiList: MutableLiveData<List<MovieUi>>) :
         DisposableObserver<MovieCollectionEntity>() {

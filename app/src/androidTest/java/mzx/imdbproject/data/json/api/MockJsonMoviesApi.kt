@@ -15,7 +15,8 @@ class MockJsonMoviesApi @Inject constructor(private val context: Context) : Movi
     companion object{
         const val MOVIE_RESPONSE = "movies_response.json"
     }
-    override fun getLatestMovies(): Observable<MovieCollectionData> = Observable.just(readResponse<MovieCollectionJson>(context, MOVIE_RESPONSE))
+    override fun getLatestMovies(): Observable<MovieCollectionData> =
+        Observable.just(readResponse<MovieCollectionJson>(context, MOVIE_RESPONSE))
 
     private inline fun <reified T> readResponse(context: Context, fileName: String): T =
         with(ObjectMapper().registerKotlinModule()) {
