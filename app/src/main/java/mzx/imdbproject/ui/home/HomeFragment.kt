@@ -28,7 +28,7 @@ class HomeFragment : DaggerFragment() {
         val root = inflater.inflate(R.layout.fragment_home, container, false)
         val textView: TextView = root.findViewById(R.id.text_home)
         homeViewModel.text.observe(this, Observer {
-            textView.text = it
+            textView.text = "Readed items ${it?.size.toString()}"
         })
         return root
     }

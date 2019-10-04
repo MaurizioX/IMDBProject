@@ -10,7 +10,8 @@ import javax.inject.Singleton
 @Singleton
 @Component(
     modules = [
-        AndroidSupportInjectionModule::class, AndroidInjectBuilder::class, ViewModelModule::class
+        AndroidSupportInjectionModule::class, AndroidInjectBuilder::class, ViewModelModule::class, AppModule::class,
+        NetworkApi::class, CommonModule::class
     ]
 )
 interface IMDBAppComponent : AndroidInjector<IMDBApp> {
