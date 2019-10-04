@@ -7,4 +7,4 @@ import kotlinx.android.parcel.Parcelize
 data class MovieUi(
     val id: Int, val originalTitle: String, val overview: String, val popularity: Double,
     val posterPath: String, val releaseDate: String, val title: String, val video: Boolean,
-    val voteAverage: Double, val voteCount: Int ) : Parcelable
+    val voteAverage: Double, val voteCount: Int ) : Parcelable {}
