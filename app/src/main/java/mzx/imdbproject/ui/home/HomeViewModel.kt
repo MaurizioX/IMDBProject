@@ -8,6 +8,7 @@ import mzx.imdbproject.domain.entity.MovieCollectionEntity
 import mzx.imdbproject.domain.entity.MovieEntity
 import mzx.imdbproject.domain.usecase.GetMoviesUseCase
 import mzx.imdbproject.ui.data.MovieUi
+import timber.log.Timber
 import javax.inject.Inject
 
 
@@ -23,15 +24,16 @@ class HomeViewModel @Inject constructor(private val getMoviesUseCase: GetMoviesU
     class MovieCollectionDisposableObserver(private val movieUiList: MutableLiveData<List<MovieUi>>) :
         DisposableObserver<MovieCollectionEntity>() {
         override fun onComplete() {
-//            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+            Timber.i("Request completed")
         }
 
         override fun onNext(t: MovieCollectionEntity) {
+
             movieUiList.value = t.results.map { movieEntity -> movieEntity.transformUi }
         }
 
         override fun onError(e: Throwable) {
-//            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+            Timber.i("Request Error : ${e.printStackTrace()}")
         }
     }
 }

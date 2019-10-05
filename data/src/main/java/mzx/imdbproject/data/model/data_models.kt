@@ -1,7 +1,7 @@
 package mzx.imdbproject.data.model
 
 interface MovieCollectionData {
-    val dates: DatesData
+    val dates: DatesData?
     val page: Int
     val results: List<MovieData>
     val totalPages: Int

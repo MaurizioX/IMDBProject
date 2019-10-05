@@ -22,7 +22,7 @@ private val DatesData.transform: DatesEntity
 private val MovieCollectionData.transform: MovieCollectionEntity?
     get() =
         MovieCollectionEntityImpl(
-            dates.transform,
+            dates?.transform,
             page,
             results.map {
                 MovieEntityImpl(

@@ -44,19 +44,7 @@ class HomeFragment : DaggerFragment() {
         }
 
         homeViewModel.movieList.observe(this, Observer {
-
             movieAdapter.submitList(it)
         })
     }
 }
-
-
-//    {
-//
-//        val root = inflater.inflate(R.layout.fragment_home, container, false)
-//        val textView: TextView = root.findViewById(R.id.text_home)
-//        homeViewModel.movieList.observe(this, Observer {
-//            textView.movieList = "Readed items ${it?.size.toString()}"
-//        })
-//        return root
-//    }

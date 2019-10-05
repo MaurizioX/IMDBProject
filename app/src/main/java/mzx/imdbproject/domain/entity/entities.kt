@@ -1,7 +1,7 @@
 package mzx.imdbproject.domain.entity
 
 data class MovieCollectionEntityImpl(
-    override val dates: DatesEntity,
+    override val dates: DatesEntity?,
     override val page: Int,
     override val results: List<MovieEntity>,
     override val totalPages: Int,

@@ -1,7 +1,7 @@
 package mzx.imdbproject.domain.entity
 
 interface MovieCollectionEntity {
-    val dates: DatesEntity
+    val dates: DatesEntity?
     val page: Int
     val results: List<MovieEntity>
     val totalPages: Int
