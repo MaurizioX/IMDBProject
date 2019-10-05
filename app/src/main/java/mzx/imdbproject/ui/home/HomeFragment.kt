@@ -39,7 +39,7 @@ class HomeFragment : DaggerFragment() {
         super.onActivityCreated(savedInstanceState)
 
         movie_list.apply {
-            layoutManager = GridLayoutManager(context, 2)
+            layoutManager = GridLayoutManager(context, context.resources.getInteger(R.integer.movies_columns))
             adapter = movieAdapter
         }
 
