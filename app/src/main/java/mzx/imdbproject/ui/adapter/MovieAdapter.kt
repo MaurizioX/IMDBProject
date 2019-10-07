@@ -1,17 +1,11 @@
 package mzx.imdbproject.ui.adapter
 
-import android.content.Context
-import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import mzx.imdbproject.databinding.MovieItemBinding
 import mzx.imdbproject.ui.data.MovieUi
-
-private val Context.inflater: LayoutInflater
-    get() = LayoutInflater.from(this)
-
 
 class MovieAdapter : ListAdapter<MovieUi, MovieViewHolder>(MovieUiDiffItem()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder =

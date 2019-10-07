@@ -7,11 +7,11 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.viewpager2.widget.ViewPager2
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_home.*
 import mzx.imdbproject.R
-import mzx.imdbproject.ui.adapter.MovieAdapter
+import mzx.imdbproject.ui.adapter.MoviesPagerAdapter
 import javax.inject.Inject
 
 class HomeFragment : DaggerFragment() {
@@ -21,12 +21,12 @@ class HomeFragment : DaggerFragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
-    lateinit var movieAdapter: MovieAdapter
+    lateinit var moviesPagerAdapter: MoviesPagerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         homeViewModel = ViewModelProviders.of(this, viewModelFactory)[HomeViewModel::class.java]
-        movieAdapter = MovieAdapter()
+        moviesPagerAdapter = MoviesPagerAdapter()
     }
 
     override fun onCreateView(
@@ -38,13 +38,13 @@ class HomeFragment : DaggerFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        movie_list.apply {
-            layoutManager = GridLayoutManager(context, context.resources.getInteger(R.integer.movies_columns))
-            adapter = movieAdapter
+        view_pager.apply {
+            orientation = ViewPager2.ORIENTATION_HORIZONTAL
+            adapter = moviesPagerAdapter
         }
 
         homeViewModel.movieList.observe(this, Observer {
-            movieAdapter.submitList(it)
+            moviesPagerAdapter.submitList(it)
         })
     }
 }

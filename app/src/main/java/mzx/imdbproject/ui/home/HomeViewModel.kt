@@ -8,6 +8,7 @@ import mzx.imdbproject.domain.entity.MovieCollectionEntity
 import mzx.imdbproject.domain.entity.MovieEntity
 import mzx.imdbproject.domain.usecase.GetMoviesUseCase
 import mzx.imdbproject.ui.data.MovieUi
+import mzx.imdbproject.ui.data.MoviesGroup
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -15,13 +16,13 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(private val getMoviesUseCase: GetMoviesUseCase) :
     ViewModel() {
 
-    private val _movieList = MutableLiveData<List<MovieUi>>().apply {
+    private val _movieList = MutableLiveData<List<MoviesGroup>>().apply {
         getMoviesUseCase.execute(MovieCollectionDisposableObserver(this))
 
     }
-    val movieList: LiveData<List<MovieUi>> = _movieList
+    val movieList: LiveData<List<MoviesGroup>> = _movieList
 
-    class MovieCollectionDisposableObserver(private val movieUiList: MutableLiveData<List<MovieUi>>) :
+    class MovieCollectionDisposableObserver(private val movieUiList: MutableLiveData<List<MoviesGroup>>) :
         DisposableObserver<MovieCollectionEntity>() {
         override fun onComplete() {
             Timber.i("Request completed")
@@ -29,7 +30,14 @@ class HomeViewModel @Inject constructor(private val getMoviesUseCase: GetMoviesU
 
         override fun onNext(t: MovieCollectionEntity) {
 
-            movieUiList.value = t.results.map { movieEntity -> movieEntity.transformUi }
+            val movies = t.results.map { movieEntity -> movieEntity.transformUi }
+
+
+            movieUiList.value = listOf(
+                MoviesGroup("General", movies),
+                MoviesGroup("Favorites", movies.filter { movieUi ->  movieUi.isFavorite })
+            )
+
         }
 
         override fun onError(e: Throwable) {
@@ -49,5 +57,6 @@ private val MovieEntity.transformUi: MovieUi
         title,
         video,
         voteAverage,
-        voteCount
+        voteCount,
+        Math.random() *100 > 70
     )
