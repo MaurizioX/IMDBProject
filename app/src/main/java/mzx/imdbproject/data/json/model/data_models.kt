@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonProperty
 import mzx.imdbproject.data.model.DatesData
 import mzx.imdbproject.data.model.MovieData
 import mzx.imdbproject.data.model.MovieCollectionData
+import mzx.imdbproject.data.room.model.DatesJson
+import mzx.imdbproject.data.room.model.MovieJson
 
 data class MovieCollectionJson(
     @JsonProperty("dates")

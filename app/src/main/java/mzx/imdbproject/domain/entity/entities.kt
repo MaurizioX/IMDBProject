@@ -24,5 +24,6 @@ data class MovieEntityImpl(
     override val title: String,
     override val video: Boolean,
     override val voteAverage: Double,
-    override val voteCount: Int
+    override val voteCount: Int,
+    override val isFavorite: Boolean
 ) : MovieEntity

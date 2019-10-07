@@ -58,5 +58,5 @@ private val MovieEntity.transformUi: MovieUi
         video,
         voteAverage,
         voteCount,
-        Math.random() *100 > 70
+        isFavorite
     )

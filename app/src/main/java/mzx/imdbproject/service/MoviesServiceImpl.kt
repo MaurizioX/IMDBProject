@@ -39,7 +39,8 @@ private val MovieCollectionData.transform: MovieCollectionEntity?
                     it.title,
                     it.video,
                     it.voteAverage,
-                    it.voteCount
+                    it.voteCount,
+                    Math.random() *100 > 70
                 )
             }, totalPages, totalResults
         )
