@@ -56,8 +56,11 @@ interface FavoriteDao {
     @Insert
     fun insert(movies: FavoriteRoom)
 
+    @Delete
+    fun delete(movies: FavoriteRoom)
+
     @Query("DELETE FROM favorite_table")
-    fun deleteAllMovies()
+    fun deleteAllFavorites()
 
     @Query("SELECT * FROM favorite_table ")
     fun getAllMovies(): Observable<List<FavoriteRoom>>

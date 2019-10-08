@@ -12,9 +12,10 @@ import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_home.*
 import mzx.imdbproject.R
 import mzx.imdbproject.ui.adapter.MoviesPagerAdapter
+import mzx.imdbproject.ui.data.MovieUi
 import javax.inject.Inject
 
-class HomeFragment : DaggerFragment() {
+class HomeFragment : DaggerFragment(), MoviesPagerAdapter.MoviesPagerAdapterListener {
 
     private lateinit var homeViewModel: HomeViewModel
 
@@ -26,7 +27,7 @@ class HomeFragment : DaggerFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         homeViewModel = ViewModelProviders.of(this, viewModelFactory)[HomeViewModel::class.java]
-        moviesPagerAdapter = MoviesPagerAdapter()
+        moviesPagerAdapter = MoviesPagerAdapter(this)
     }
 
     override fun onCreateView(
@@ -46,5 +47,9 @@ class HomeFragment : DaggerFragment() {
         homeViewModel.movieList.observe(this, Observer {
             moviesPagerAdapter.submitList(it)
         })
+    }
+
+    override fun onFavoriteClicked(movieUi: MovieUi) {
+        homeViewModel.updateFavorite(movieUi)
     }
 }

@@ -7,10 +7,17 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import mzx.imdbproject.R
 import mzx.imdbproject.databinding.MoviePagerItemBinding
+import mzx.imdbproject.ui.data.MovieUi
 import mzx.imdbproject.ui.data.MoviesGroup
 
-class MoviesPagerAdapter :
-    ListAdapter<MoviesGroup, MoviesPagerAdapter.MoviesPagerViewHolder>(MoviesPagerDiffItem()) {
+class MoviesPagerAdapter(private val listener: MoviesPagerAdapterListener) :
+    ListAdapter<MoviesGroup, MoviesPagerAdapter.MoviesPagerViewHolder>(MoviesPagerDiffItem()),
+    MovieAdapter.MovieAdapterListener {
+
+    interface MoviesPagerAdapterListener {
+        fun onFavoriteClicked(movieUi: MovieUi)
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MoviesPagerViewHolder =
         MoviesPagerViewHolder(
             MoviePagerItemBinding.inflate(
@@ -20,7 +27,7 @@ class MoviesPagerAdapter :
             )
         ).apply {
 
-            binder.moviesPagerAdapter = MovieAdapter()
+            binder.moviesPagerAdapter = MovieAdapter(this@MoviesPagerAdapter)
             binder.movieItem.apply {
                 adapter = binder.moviesPagerAdapter
                 layoutManager = GridLayoutManager(
@@ -35,7 +42,6 @@ class MoviesPagerAdapter :
         holder.binder.moviesPagerAdapter?.submitList(getItem(position).movieUis)
     }
 
-
     class MoviesPagerViewHolder(val binder: MoviePagerItemBinding) :
         RecyclerView.ViewHolder(binder.root)
 
@@ -45,5 +51,9 @@ class MoviesPagerAdapter :
 
         override fun areContentsTheSame(oldItem: MoviesGroup, newItem: MoviesGroup): Boolean =
             oldItem == newItem
+    }
+
+    override fun onFavoriteClicked(movieUi: MovieUi) {
+        listener.onFavoriteClicked(movieUi)
     }
 }

@@ -7,10 +7,17 @@ import androidx.recyclerview.widget.RecyclerView
 import mzx.imdbproject.databinding.MovieItemBinding
 import mzx.imdbproject.ui.data.MovieUi
 
-class MovieAdapter : ListAdapter<MovieUi, MovieViewHolder>(MovieUiDiffItem()) {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder =
-        MovieViewHolder(MovieItemBinding.inflate(parent.context.inflater, parent, false))
+class MovieAdapter(private val listener: MovieAdapterListener) :
+    ListAdapter<MovieUi, MovieViewHolder>(MovieUiDiffItem()) {
 
+    interface MovieAdapterListener {
+        fun onFavoriteClicked(movieUi: MovieUi)
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder =
+        MovieViewHolder(MovieItemBinding.inflate(parent.context.inflater, parent, false)).apply {
+            binding.listener = listener
+        }
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         holder.binding.movieUi = getItem(position)
@@ -18,9 +25,7 @@ class MovieAdapter : ListAdapter<MovieUi, MovieViewHolder>(MovieUiDiffItem()) {
 }
 
 class MovieViewHolder(val binding: MovieItemBinding) :
-    RecyclerView.ViewHolder(binding.root) {
-
-}
+    RecyclerView.ViewHolder(binding.root)
 
 class MovieUiDiffItem : DiffUtil.ItemCallback<MovieUi>() {
     override fun areItemsTheSame(oldItem: MovieUi, newItem: MovieUi): Boolean =

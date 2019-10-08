@@ -9,6 +9,10 @@
         <variable
             name="movieUi"
             type="mzx.imdbproject.ui.data.MovieUi" />
+
+        <variable
+            name="listener"
+            type="mzx.imdbproject.ui.adapter.MovieAdapter.MovieAdapterListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -33,6 +37,7 @@
             android:layout_marginTop="@dimen/small_margin"
             android:button="@drawable/ic_favorite"
             android:checked='@{movieUi.favorite? true:false}'
+            android:onClick="@{()->listener.onFavoriteClicked(movieUi)}"
             app:layout_constraintBottom_toTopOf="@id/title"
             app:layout_constraintEnd_toEndOf="@id/poster"
             app:layout_constraintTop_toBottomOf="@id/poster" />

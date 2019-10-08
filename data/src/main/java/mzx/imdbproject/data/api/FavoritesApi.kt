@@ -5,5 +5,8 @@ import mzx.imdbproject.data.model.FavoriteData
 
 interface FavoritesApi {
     fun getFavorites(): Observable<List<FavoriteData>>
-    fun saveFavorite(favoriteData: FavoriteData)
+    fun saveFavorite(
+        favoriteData: FavoriteData,
+        selection: Boolean
+    )
 }

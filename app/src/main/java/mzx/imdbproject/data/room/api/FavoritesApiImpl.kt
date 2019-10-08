@@ -11,6 +11,10 @@ class FavoritesApiImpl @Inject constructor(private val favoriteDao: FavoriteDao)
     override fun getFavorites(): Observable<List<FavoriteData>> =
         favoriteDao.getAllMovies().map { it }
 
-    override fun saveFavorite(favoriteData: FavoriteData) =
-        favoriteDao.insert(favoriteData as FavoriteRoom)
+    override fun saveFavorite(favoriteData: FavoriteData, selection: Boolean) =
+        if (selection) {
+            favoriteDao.delete(favoriteData as FavoriteRoom)
+        } else {
+            favoriteDao.insert(favoriteData as FavoriteRoom)
+        }
 }

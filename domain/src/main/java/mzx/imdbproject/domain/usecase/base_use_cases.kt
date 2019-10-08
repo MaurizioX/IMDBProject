@@ -21,8 +21,9 @@ import mzx.imdbproject.domain.executor.ThreadExecutor
  * This use case is to be used when we expect multiple values to be emitted via an [Observable].
  *
  */
-abstract class ObservableUseCase<Results, in Params>(threadExecutor: ThreadExecutor,
-                                                     postExecutionThread: PostExecutionThread
+abstract class ObservableUseCase<Results, in Params>(
+    threadExecutor: ThreadExecutor,
+    postExecutionThread: PostExecutionThread
 ) : BaseReactiveUseCase(threadExecutor, postExecutionThread) {
 
     /**
@@ -49,8 +50,10 @@ abstract class ObservableUseCase<Results, in Params>(threadExecutor: ThreadExecu
     }
 }
 
-abstract class BaseReactiveUseCase(threadExecutor: ThreadExecutor,
-                                   postExecutionThread: PostExecutionThread) {
+abstract class BaseReactiveUseCase(
+    threadExecutor: ThreadExecutor,
+    postExecutionThread: PostExecutionThread
+) {
 
     protected val threadExecutorScheduler: Scheduler = Schedulers.from(threadExecutor)
 
