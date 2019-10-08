@@ -3,14 +3,20 @@ package mzx.imdbproject.di
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.room.Room
 import dagger.Binds
 import dagger.Module
+import dagger.Provides
 import dagger.android.ContributesAndroidInjector
 import dagger.multibindings.IntoMap
 import mzx.imdbproject.IMDBApp
 import mzx.imdbproject.activity.MainActivity
+import mzx.imdbproject.data.api.FavoritesApi
 import mzx.imdbproject.data.api.MoviesApi
 import mzx.imdbproject.data.json.api.MoviesApiImpl
+import mzx.imdbproject.data.room.FavoriteDao
+import mzx.imdbproject.data.room.MoviesDatabase
+import mzx.imdbproject.data.room.api.FavoritesApiImpl
 import mzx.imdbproject.domain.executor.PostExecutionThread
 import mzx.imdbproject.domain.executor.ThreadExecutor
 import mzx.imdbproject.domain.service.MoviesService
@@ -83,4 +89,31 @@ abstract class CommonModule {
     @Binds
     @Singleton
     abstract fun bindContext(app: IMDBApp): Context
+}
+
+@Module
+abstract class DbModule {
+
+    @Module
+    companion object {
+
+        @Provides
+        @Singleton
+        @JvmStatic
+        fun providesDB(context: Context): MoviesDatabase = Room.databaseBuilder(
+            context.applicationContext,
+            MoviesDatabase::class.java,
+            "moviesDB"
+        ).build()
+
+
+        @Provides
+        @Singleton
+        @JvmStatic
+        fun provides(moviesDatabase: MoviesDatabase): FavoriteDao = moviesDatabase.favoriteDao()
+    }
+
+    @Binds
+    abstract fun bindsFavoritesApi(favoritesApi: FavoritesApiImpl): FavoritesApi
+
 }

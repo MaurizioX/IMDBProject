@@ -1,11 +1,10 @@
 package mzx.imdbproject.data.json.model
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonProperty
 import mzx.imdbproject.data.model.DatesData
 import mzx.imdbproject.data.model.MovieData
 import mzx.imdbproject.data.model.MovieCollectionData
-import mzx.imdbproject.data.room.model.DatesJson
-import mzx.imdbproject.data.room.model.MovieJson
 
 data class MovieCollectionJson(
     @JsonProperty("dates")
@@ -27,13 +26,14 @@ data class DatesJson(
     override val minimum: String
 ) : DatesData
 
+//@JsonIgnoreProperties
 data class MovieJson(
     @JsonProperty("adult")
     override val adult: Boolean,
     @JsonProperty("backdrop_path")
     override val backdropPath: String,
-    @JsonProperty("genre_ids")
-    override val genreIds: List<Int>,
+//    @JsonProperty("genre_ids")
+//    override val genreIds: List<Int>,
     @JsonProperty("id")
     override val id: Int,
     @JsonProperty("original_language")

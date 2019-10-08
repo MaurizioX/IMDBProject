@@ -1,5 +1,7 @@
 package mzx.imdbproject.data.json.api
 
+import com.fasterxml.jackson.databind.DeserializationFeature
+import com.fasterxml.jackson.databind.ObjectMapper
 import io.reactivex.Observable
 import mzx.imdbproject.BuildConfig
 import mzx.imdbproject.data.api.MoviesApi
@@ -18,13 +20,18 @@ import javax.inject.Inject
 class MoviesApiImpl @Inject constructor() : MoviesApi {
     private val client = OkHttpClient().newBuilder()
         .addInterceptor(HttpLoggingInterceptor().apply {
-            level = if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY else HttpLoggingInterceptor.Level.NONE
+            level =
+                if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY else HttpLoggingInterceptor.Level.NONE
         })
         .build()
     private val movieRetrofitApi = Retrofit.Builder()
         .baseUrl(BuildConfig.BASE_URL)
         .client(client)
-        .addConverterFactory(JacksonConverterFactory.create())
+        .addConverterFactory(JacksonConverterFactory.create(ObjectMapper().apply {
+            disable(
+                DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES
+            )
+        }))
         .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
         .build().create(MovieRetrofitApi::class.java)
 
@@ -37,7 +44,8 @@ class MoviesApiImpl @Inject constructor() : MoviesApi {
         false
     ).map { it ->
         Timber.d(it.toString())
-        it}
+        it
+    }
 }
 
 interface MovieRetrofitApi {

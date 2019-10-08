@@ -16,7 +16,7 @@ interface DatesData {
 interface MovieData {
     val adult: Boolean
     val backdropPath: String
-    val genreIds: List<Int>
+    //    val genreIds: List<Int>
     val id: Int
     val originalLanguage: String
     val originalTitle: String
@@ -28,4 +28,8 @@ interface MovieData {
     val video: Boolean
     val voteAverage: Double
     val voteCount: Int
+}
+
+interface FavoriteData {
+    val id: Int
 }
