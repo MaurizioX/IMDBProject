@@ -14,10 +14,10 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.jackson.JacksonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
-import timber.log.Timber
 import javax.inject.Inject
 
 class MoviesApiImpl @Inject constructor() : MoviesApi {
+
     private val client = OkHttpClient().newBuilder()
         .addInterceptor(HttpLoggingInterceptor().apply {
             level =
@@ -26,7 +26,7 @@ class MoviesApiImpl @Inject constructor() : MoviesApi {
         .build()
     private val movieRetrofitApi = Retrofit.Builder()
         .baseUrl(BuildConfig.BASE_URL)
-        .client(client)
+//        .client(client)
         .addConverterFactory(JacksonConverterFactory.create(ObjectMapper().apply {
             disable(
                 DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES
@@ -42,8 +42,7 @@ class MoviesApiImpl @Inject constructor() : MoviesApi {
         "run",
         "1",
         false
-    ).map { it ->
-        Timber.d(it.toString())
+    ).map {
         it
     }
 }

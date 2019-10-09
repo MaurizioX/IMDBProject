@@ -21,8 +21,8 @@ import mzx.imdbproject.domain.executor.PostExecutionThread
 import mzx.imdbproject.domain.executor.ThreadExecutor
 import mzx.imdbproject.domain.service.MoviesService
 import mzx.imdbproject.service.MoviesServiceImpl
-import mzx.imdbproject.ui.home.HomeFragment
-import mzx.imdbproject.ui.home.HomeViewModel
+import mzx.imdbproject.ui.movie.MovieFragment
+import mzx.imdbproject.ui.movie.MovieViewModel
 import mzx.imdbproject.utils.JobExecutor
 import mzx.imdbproject.utils.UIThread
 import mzx.imdbproject.utils.ViewModelFactory
@@ -39,7 +39,7 @@ abstract class AndroidInjectBuilder {
 
     @FragmentScope
     @ContributesAndroidInjector
-    abstract fun bindHomeFragment(): HomeFragment
+    abstract fun bindHomeFragment(): MovieFragment
 }
 
 
@@ -57,8 +57,8 @@ abstract class ViewModelModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(HomeViewModel::class)
-    internal abstract fun postListViewModel(viewModel: HomeViewModel): ViewModel
+    @ViewModelKey(MovieViewModel::class)
+    internal abstract fun postListViewModel(viewModel: MovieViewModel): ViewModel
 
     //Add more ViewModels here
 }

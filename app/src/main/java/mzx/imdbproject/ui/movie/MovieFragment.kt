@@ -1,4 +1,4 @@
-package mzx.imdbproject.ui.home
+package mzx.imdbproject.ui.movie
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -15,9 +15,9 @@ import mzx.imdbproject.ui.adapter.MoviesPagerAdapter
 import mzx.imdbproject.ui.data.MovieUi
 import javax.inject.Inject
 
-class HomeFragment : DaggerFragment(), MoviesPagerAdapter.MoviesPagerAdapterListener {
+class MovieFragment : DaggerFragment(), MoviesPagerAdapter.MoviesPagerAdapterListener {
 
-    private lateinit var homeViewModel: HomeViewModel
+    private lateinit var homeViewModel: MovieViewModel
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -26,7 +26,7 @@ class HomeFragment : DaggerFragment(), MoviesPagerAdapter.MoviesPagerAdapterList
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        homeViewModel = ViewModelProviders.of(this, viewModelFactory)[HomeViewModel::class.java]
+        homeViewModel = ViewModelProviders.of(this, viewModelFactory)[MovieViewModel::class.java]
         moviesPagerAdapter = MoviesPagerAdapter(this)
     }
 

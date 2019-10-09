@@ -1,4 +1,4 @@
-package mzx.imdbproject.ui.home
+package mzx.imdbproject.ui.movie
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -14,7 +14,7 @@ import timber.log.Timber
 import javax.inject.Inject
 
 
-class HomeViewModel @Inject constructor(
+class MovieViewModel @Inject constructor(
     private val getMoviesUseCase: GetMoviesUseCase,
     private val saveFavoriteMoviesUseCase: SaveFavoriteMoviesUseCase
 ) :

@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/nav_movie"
-        android:name="mzx.imdbproject.ui.home.HomeFragment"
+        android:name="mzx.imdbproject.ui.movie.MovieFragment"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home" />
 
