@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -51,5 +52,10 @@ class MovieFragment : DaggerFragment(), MoviesPagerAdapter.MoviesPagerAdapterLis
 
     override fun onFavoriteClicked(movieUi: MovieUi) {
         homeViewModel.updateFavorite(movieUi)
+    }
+
+    override fun onMovieClicked(movieUi: MovieUi) {
+        val action = MovieFragmentDirections.actionNavMovieToMovieDetailFragment(movieUi)
+        findNavController().navigate(action)
     }
 }

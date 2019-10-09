@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'androidx.navigation.safeargs'
 
 android {
     compileSdkVersion 29
@@ -18,9 +19,9 @@ android {
         javaCompileOptions {
             annotationProcessorOptions {
                 arguments = [
-                        "room.schemaLocation":"$projectDir/schemas".toString(),
-                        "room.incremental":"true",
-                        "room.expandProjection":"true"]
+                        "room.schemaLocation"  : "$projectDir/schemas".toString(),
+                        "room.incremental"     : "true",
+                        "room.expandProjection": "true"]
             }
         }
 
@@ -73,6 +74,7 @@ dependencies {
     // Dagger DI
     implementation "com.google.dagger:dagger:$dagger_version"
     implementation "com.google.dagger:dagger-android-support:$dagger_version"
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     kapt "com.google.dagger:dagger-compiler:$dagger_version"
     kapt "com.google.dagger:dagger-android-processor:$dagger_version"
 
@@ -99,7 +101,8 @@ dependencies {
     //Room
     def room_version = "2.2.0-rc01"
     implementation "androidx.room:room-runtime:$room_version"
-    kapt "androidx.room:room-compiler:$room_version" // For Kotlin use kapt instead of annotationProcessor
+    kapt "androidx.room:room-compiler:$room_version"
+    // For Kotlin use kapt instead of annotationProcessor
     // optional - RxJava support for Room
     implementation "androidx.room:room-rxjava2:$room_version"
     // Test helpers
@@ -107,7 +110,7 @@ dependencies {
 
 
     //Retrofit
-    implementation ("com.squareup.retrofit2:retrofit:$retrofit_version"){
+    implementation("com.squareup.retrofit2:retrofit:$retrofit_version") {
         exclude module: 'okhttp'
     }
     implementation 'com.squareup.retrofit2:converter-jackson:2.1.0'

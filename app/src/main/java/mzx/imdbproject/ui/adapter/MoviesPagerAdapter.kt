@@ -17,6 +17,7 @@ class MoviesPagerAdapter(private val listener: MoviesPagerAdapterListener) :
 
     interface MoviesPagerAdapterListener {
         fun onFavoriteClicked(movieUi: MovieUi)
+        fun onMovieClicked(movieUi: MovieUi)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MoviesPagerViewHolder =
@@ -82,5 +83,9 @@ class MoviesPagerAdapter(private val listener: MoviesPagerAdapterListener) :
 
     override fun onFavoriteClicked(movieUi: MovieUi) {
         listener.onFavoriteClicked(movieUi)
+    }
+
+    override fun onMovieClicked(movieUi: MovieUi) {
+        listener.onMovieClicked(movieUi)
     }
 }

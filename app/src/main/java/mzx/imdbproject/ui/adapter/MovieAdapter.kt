@@ -13,6 +13,7 @@ class MovieAdapter(private val listener: MovieAdapterListener) :
 
     interface MovieAdapterListener {
         fun onFavoriteClicked(movieUi: MovieUi)
+        fun onMovieClicked(movieUi: MovieUi)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder =
@@ -29,9 +30,9 @@ class MovieAdapter(private val listener: MovieAdapterListener) :
         position: Int,
         payloads: MutableList<Any>
     ) {
-        if (payloads.isEmpty()){
+        if (payloads.isEmpty()) {
             super.onBindViewHolder(holder, position, payloads)
-        } else{
+        } else {
             holder.binding.favorite.isChecked = getItem(position).isFavorite
         }
     }
