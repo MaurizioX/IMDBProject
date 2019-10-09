@@ -1,5 +1,6 @@
 package mzx.imdbproject.ui.adapter
 
+import android.os.Bundle
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.GridLayoutManager
@@ -42,15 +43,41 @@ class MoviesPagerAdapter(private val listener: MoviesPagerAdapterListener) :
         holder.binder.moviesPagerAdapter?.submitList(getItem(position).movieUis)
     }
 
+    override fun onBindViewHolder(
+        holder: MoviesPagerViewHolder,
+        position: Int,
+        payloads: MutableList<Any>
+    ) {
+        if (payloads.isEmpty()) {
+            super.onBindViewHolder(holder, position, payloads)
+        } else {
+            holder.binder.moviesPagerAdapter?.submitList(getItem(position).movieUis)
+        }
+    }
+
     class MoviesPagerViewHolder(val binder: MoviePagerItemBinding) :
         RecyclerView.ViewHolder(binder.root)
 
     class MoviesPagerDiffItem : DiffUtil.ItemCallback<MoviesGroup>() {
+        companion object {
+            const val ITEM_UPDATED = "ITEM_UPDATED"
+
+        }
+
         override fun areItemsTheSame(oldItem: MoviesGroup, newItem: MoviesGroup): Boolean =
             oldItem.groupName == newItem.groupName
 
         override fun areContentsTheSame(oldItem: MoviesGroup, newItem: MoviesGroup): Boolean =
             oldItem == newItem
+
+        override fun getChangePayload(oldItem: MoviesGroup, newItem: MoviesGroup): Any? =
+            if (oldItem != newItem) {
+                Bundle().apply {
+                    putBoolean(ITEM_UPDATED, true)
+                }
+            } else {
+                null
+            }
     }
 
     override fun onFavoriteClicked(movieUi: MovieUi) {
